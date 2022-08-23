@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>jsp2</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+  </welcome-file-list>
+  
+  <!-- 에러페이지 설정하기 : HTTP 상태코드 (404,500오류코드 지정) 또는 Exception 종륭에 따라하거
+  모든 에러(오류) 에 대해하나의 파일 (페이지 사용)
+  에러(Exception)가 발생하면 설정된 오류페이지 포워드 url이 변경되지 않음.-->
+  
+  <error-page>
+  		<error-code>404</error-code>
+  		<location>/error/error404.jsp</location>
+  </error-page>
+  <error-page>
+	 	 <exception-type>java.lang.Exception</exception-type>
+  		<location>/error/errorAll.jsp</location>
+  </error-page>
+</web-app>

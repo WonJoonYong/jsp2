@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="freeboard">
+	<select id="getPageList" parameterType="java.util.Map"
+		resultType="board.vo.Freeboard">
+		SELECT * FROM
+		(SELECT rownum r ,f.* FROM
+		(SELECT * FROM FREEBOARD f ORDER BY idx DESC) f)
+		WHERE r BETWEEN #{startNo} AND #{endNo}
+	</select>
+
+	<select id="getCount" resultType="int">
+		SELECT COUNT(*) FROM FREEBOARD
+	</select>
+
+	<select id="detail" resultType="board.vo.Freeboard"
+		parameterType="int">
+		SELECT * FROM FREEBOARD WHERE IDX = #{idx}
+
+	</select>
+	<update id="readcountUp">
+		UPDATE FREEBOARD
+		SET READCOUNT = READCOUNT +1
+		WHERE IDX = #{idx}
+	</update>
+
+	<insert id="insert" parameterType="board.vo.Freeboard">
+		INSERT INTO FREEBOARD (IDX,WRITER,PASSWORD,SUBJECT,CONTENT,IP)
+		VALUES
+		(BOARD_IDX_SEQ.NEXTVAL,#{writer},#{password},#{subject},#{content},#{ip})
+
+	</insert>
+
+	<delete id="delete" parameterType="java.util.Map">
+		delete from freeboard where idx =#{idx} and password=#{password}
+
+	</delete>
+
+	<update id="update" parameterType="board.vo.Freeboard">
+		update Freeboard set subject = #{subject},
+		content=#{content} , wdate = sysdate
+		where idx = #{idx}
+
+	</update>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>
